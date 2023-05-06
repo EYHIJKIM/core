@@ -26,11 +26,5 @@ import org.springframework.context.annotation.FilterType;
 )
 public class AutoAppConfig {  //수동등록 빈
 
-        @Bean(name = "memoryMemberRepository")
-        MemberRepository memberRepository(){
-                return new MemoryMemberRepository();
-        }
-
-
 
 }
