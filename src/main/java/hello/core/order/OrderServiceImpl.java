@@ -1,5 +1,6 @@
 package hello.core.order;
 
+import hello.core.annotation.MainDiscountPolicy;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
@@ -56,7 +57,7 @@ public class OrderServiceImpl implements OrderService {
     //ex) 메인 DB / 보조 DB(거의안씀) 가 있을 때, 메인 DB 빈에 primary를 걸어주고 보조를 사용하는 경우에는 qualifier or 이름지정을 해서 사용하는 것.
     // qualifier가 우선순위가 높음(더 구체적이고 자세한 경우가 우선순위가 높음!)
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
         System.out.println("1. OrderServiceImpl.OrderServiceImpl");
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
