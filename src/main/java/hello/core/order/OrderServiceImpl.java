@@ -5,10 +5,11 @@ import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor //Final(필수) 멤버변수 값을 생성자에서 자동으로 넣어주는 롬복 @
+//@RequiredArgsConstructor //Final(필수) 멤버변수 값을 생성자에서 자동으로 넣어주는 롬복 @
 public class OrderServiceImpl implements OrderService {
 
     /*
@@ -47,14 +48,20 @@ public class OrderServiceImpl implements OrderService {
     // >> 생성자 주입을 사용하라 (1.불변,누락을 막을 수 있음/ 2.final 키워드 사용가능 : 값이 설정되지 않는 오류를 컴파일 시점에서 막아줌!(깜빡하고 생성자에서 값을 안넣어준경우))
     //@Autowired
     //필수,불변 의존관계
-    /*
-    @RequiredArgsConstructor 가 하는 기능이 바로 아래 생성자 코드
+
+    //@RequiredArgsConstructor 가 하는 기능이 바로 아래 생성자 코드
+    //qualifier : 동일한 인터페이스를 사용하는 경우 autowired를 했을 때, 예외가 날 수 있음(nosuchbeandefinition). 이 때 이름을 명명해주는 것
+    // >> >> 주입받을 때 모든 코드에 qualifier를 명명해 주어야 한다는 번거로움이 존재..
+    //priamary : 우선순위를 정해주는 것. 동일한 인터페이스를 사용하는 경우 . primary를 많이 사용한다.
+    //ex) 메인 DB / 보조 DB(거의안씀) 가 있을 때, 메인 DB 빈에 primary를 걸어주고 보조를 사용하는 경우에는 qualifier or 이름지정을 해서 사용하는 것.
+    // qualifier가 우선순위가 높음(더 구체적이고 자세한 경우가 우선순위가 높음!)
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         System.out.println("1. OrderServiceImpl.OrderServiceImpl");
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
-*/
+
     //일반메서드 주입. 일반적으로 사용하지 않음.. >> 생성자 주입을 사용하므로
     /*
     @Autowired
