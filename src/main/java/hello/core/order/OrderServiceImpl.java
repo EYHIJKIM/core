@@ -3,10 +3,12 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor //Final(필수) 멤버변수 값을 생성자에서 자동으로 넣어주는 롬복 @
 public class OrderServiceImpl implements OrderService {
 
     /*
@@ -38,25 +40,29 @@ public class OrderServiceImpl implements OrderService {
         this.memberRepository = memberRepository;
     }*/
 
-     private MemberRepository memberRepository;
-     private  DiscountPolicy discountPolicy;
+     private final MemberRepository memberRepository;
+     private final DiscountPolicy discountPolicy;
 
-    //1. 생성자 주입 : 생성자가 한개 있으면 @Autowired 생략가능
+    //**1. 생성자 주입 : 생성자가 한개 있으면 **@Autowired 생략가능
+    // >> 생성자 주입을 사용하라 (1.불변,누락을 막을 수 있음/ 2.final 키워드 사용가능 : 값이 설정되지 않는 오류를 컴파일 시점에서 막아줌!(깜빡하고 생성자에서 값을 안넣어준경우))
     //@Autowired
     //필수,불변 의존관계
+    /*
+    @RequiredArgsConstructor 가 하는 기능이 바로 아래 생성자 코드
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         System.out.println("1. OrderServiceImpl.OrderServiceImpl");
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
-
+*/
     //일반메서드 주입. 일반적으로 사용하지 않음.. >> 생성자 주입을 사용하므로
+    /*
     @Autowired
     public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy){
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
-
+    */
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
