@@ -20,7 +20,8 @@ public class AllBeanTest {
     @Test
     void findAllBean(){
         /*
-            1. AutoAppConfig : @Configuration이 붙은 최상위 클래스로, 해당 클래스의 하위에 있는 @Component들을 스프링 빈에 등록한다
+            1. AutoAppConfig : @Configuration / @ComponentScan 이 붙은 최상위 클래스로,
+            ComponentScan 설정에 기반하여(필터링 등을 제외하고) 해당 클래스의 하위에 있는 @Component들을 스프링 빈에 등록한다
             2. discountService 빈에 의존주입을 하여 객체 생성
                 >> 이 때 DiscountService는 멤버변수 Map으로 모든 DiscountPolicy를 주입 받는다. (fixDiscountPolicy / rateDiscountPolicy)
             3. DiscountService.discount(Member,가격,"discount방법")
