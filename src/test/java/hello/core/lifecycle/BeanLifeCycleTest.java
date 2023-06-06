@@ -22,7 +22,7 @@ public class BeanLifeCycleTest {
 
         //destroyMethod 의 디폴트가 "(inferred)" =추론 으로 등록되어있음..이름 그대로 추론해서 종료메서드(close,shutdown 등)를 실행하는 것.
         //즉 destoryMethod를 적어주지 않아도 종료메서드가 자동으로 실행 됨. 종료메서드 실행시키기 싫으면 "" 빈값으로 넣어주면 실행 안됨.
-        @Bean(initMethod = "init", destroyMethod = "close")
+        @Bean//(initMethod = "init", destroyMethod = "close")
         public NetworkClient networkClient(){
             NetworkClient networkClient = new NetworkClient();
             networkClient.setUrl("http://hello-spring.dev");

@@ -1,6 +1,8 @@
 package hello.core.lifecycle;
 
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 public class NetworkClient {
 
@@ -34,7 +36,7 @@ public class NetworkClient {
 
 
         //@InitializingBean 상속 메소드 (초기화 인터페이스) : 의존주입이 끝나면 실행하는 메소드
-
+        @PostConstruct
         public void init() {
             System.out.println("NetworkClient.init");
             connect();
@@ -43,6 +45,7 @@ public class NetworkClient {
 
     //@DisposableBean 상속 메소드(소멸 인터페이스) : 종료될때실행
 
+    @PreDestroy
     public void close() {
         disconnect();
     }
